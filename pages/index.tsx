@@ -1,20 +1,51 @@
+import * as React from "react";
 import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
-import { ThemeProvider, createTheme } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
 
 const darkTheme = createTheme({
   palette: {
-    mode: 'dark',
+    mode: "dark",
   },
 });
 
 const Home: NextPage = () => {
+  const [sourceLang, setSourceLang] = React.useState("eng-us");
+  const [destLang, setDestLang] = React.useState("pt-br");
+
+  const languages = [
+    { code: "eng-us", label: "English" },
+    { code: "pt-br", label: "Portuguese (BR)" },
+  ];
+
+  let langMenuItems: Array<any> = [];
+
+  languages.forEach((item) => {
+    langMenuItems.push(
+      <MenuItem key={item.code} value={item.code}>
+        {item.label}
+      </MenuItem>
+    );
+  });
+
+  const changeSourceLang = (event: SelectChangeEvent) => {
+    setSourceLang(event.target.value as string);
+  };
+
+  const changeDestLang = (event: SelectChangeEvent) => {
+    setDestLang(event.target.value as string);
+  };
+
   return (
     <div
       className={`${styles.container} grid content-between bg-prim-dark-blue text-prim-white`}
@@ -46,8 +77,18 @@ const Home: NextPage = () => {
 
           <div className="grid grid-cols-3 justify-content-center mt-5">
             <div className="">
-              <p>From</p>
-              <p>English</p>
+              <Box sx={{ minWidth: 60 }}>
+                <FormControl fullWidth>
+                  <InputLabel>From</InputLabel>
+                  <Select
+                    value={sourceLang}
+                    label="From"
+                    onChange={changeSourceLang}
+                  >
+                    {langMenuItems}
+                  </Select>
+                </FormControl>
+              </Box>
             </div>
 
             <div>
@@ -55,8 +96,14 @@ const Home: NextPage = () => {
             </div>
 
             <div className="">
-              <p>To</p>
-              <p>Portuguese &#40;BR&#41;</p>
+              <Box sx={{ minWidth: 60 }}>
+                <FormControl fullWidth>
+                  <InputLabel>To</InputLabel>
+                  <Select value={destLang} label="To" onChange={changeDestLang}>
+                    {langMenuItems}
+                  </Select>
+                </FormControl>
+              </Box>
             </div>
           </div>
 
@@ -80,7 +127,6 @@ const Home: NextPage = () => {
           </div>
         </main>
       </ThemeProvider>
-
 
       <footer className={styles.footer}>
         <a
