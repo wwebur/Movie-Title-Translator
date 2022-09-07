@@ -6,6 +6,7 @@ import styles from "../styles/Home.module.css";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import Button from "@mui/material/Button";
+import SwapHorizIcon from '@mui/icons-material/SwapHoriz';
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import InputLabel from "@mui/material/InputLabel";
@@ -20,24 +21,9 @@ const darkTheme = createTheme({
 });
 
 const Home: NextPage = () => {
-  const [sourceLang, setSourceLang] = React.useState("eng-us");
+  const [sourceLang, setSourceLang] = React.useState("en-us");
   const [destLang, setDestLang] = React.useState("pt-br");
-
-  const languages = [
-    { code: "eng-us", label: "English" },
-    { code: "pt-br", label: "Portuguese (BR)" },
-  ];
-
-  let langMenuItems: Array<any> = [];
-
-  languages.forEach((item) => {
-    langMenuItems.push(
-      <MenuItem key={item.code} value={item.code}>
-        {item.label}
-      </MenuItem>
-    );
-  });
-
+  
   const changeSourceLang = (event: SelectChangeEvent) => {
     setSourceLang(event.target.value as string);
   };
@@ -45,6 +31,37 @@ const Home: NextPage = () => {
   const changeDestLang = (event: SelectChangeEvent) => {
     setDestLang(event.target.value as string);
   };
+
+  function swapLangs() {
+    const finalSrcLang = destLang
+    const finalDestLang = sourceLang
+
+    setSourceLang(finalSrcLang)
+    setDestLang(finalDestLang)
+  }
+
+  const languages = {
+    "en-us": {
+      code: "en-us",
+      label: "English"
+    },
+    "pt-br": {
+      code: "pt-br",
+      label: "Portuguese (BR)"
+    }
+  };
+
+  let langMenuItems: Array<any> = [];
+
+  for (const obj of Object.values(languages)) {
+    langMenuItems.push(
+      <MenuItem key={obj.code} value={obj.code}>
+        {obj.label}
+      </MenuItem>
+    )
+  }
+
+  let searchQuery = "";
 
   return (
     <div
@@ -91,12 +108,14 @@ const Home: NextPage = () => {
               </Box>
             </div>
 
-            <div>
-              <Button variant="outlined">Switch</Button>
+            <div className="grid place-items-center">
+              <Button variant="outlined" onClick={swapLangs}>
+                <SwapHorizIcon></SwapHorizIcon>
+              </Button>
             </div>
 
-            <div className="">
-              <Box sx={{ minWidth: 60 }}>
+            <div className="grid place-items-start">
+              <Box sx={{ minWidth: 200 }}>
                 <FormControl fullWidth>
                   <InputLabel>To</InputLabel>
                   <Select value={destLang} label="To" onChange={changeDestLang}>
