@@ -1,4 +1,7 @@
 /** @type {import('tailwindcss').Config} */
+
+const defaultTheme = require('tailwindcss/defaultTheme')
+
 module.exports = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx}",
@@ -13,6 +16,10 @@ module.exports = {
       "sec-light-blue": "#5090d3",
       "prim-white": "#ffffff",
       "sec-white": "#757575",
+    },
+    screens: {
+      'xs': '475px',
+      ...defaultTheme.screens,
     },
     extend: {},
   },
