@@ -99,7 +99,7 @@ const Home: NextPage = () => {
             <Box
               component="form"
               sx={{
-                "& > :not(style)": { m: 1, minWidth: 350 },
+                "& > :not(style)": { m: 1, minWidth: 408 },
               }}
               noValidate
               autoComplete="off"
@@ -121,46 +121,53 @@ const Home: NextPage = () => {
             </Box>
           </div>
 
-          <div className="grid grid-cols-3 justify-content-center mt-5">
-            <div className="grid justify-self-end">
-              <Box sx={{ width: 180 }}>
-                <FormControl fullWidth>
-                  <InputLabel>From</InputLabel>
-                  <Select
-                    value={sourceLang}
-                    label="From"
-                    onChange={changeSourceLang}
-                  >
-                    {langMenuItems}
-                  </Select>
-                </FormControl>
-              </Box>
-            </div>
+          <div className="grid place-content-center mt-3">
+            <div className="flex">
+              <div>
+                <Box sx={{ width: 180 }}>
+                  <FormControl fullWidth>
+                    <InputLabel>From</InputLabel>
+                    <Select
+                      value={sourceLang}
+                      label="From"
+                      onChange={changeSourceLang}
+                    >
+                      {langMenuItems}
+                    </Select>
+                  </FormControl>
+                </Box>
+              </div>
 
-            <div className="grid justify-self-center">
-              <IconButton onClick={swapLangs}>
-                <SwapHorizIcon></SwapHorizIcon>
-              </IconButton>
-            </div>
+              <div className="mt-2 ml-1 mr-1">
+                <IconButton onClick={swapLangs}>
+                  <SwapHorizIcon></SwapHorizIcon>
+                </IconButton>
+              </div>
 
-            <div className="grid justify-self-start">
-              <Box sx={{ width: 180 }}>
-                <FormControl fullWidth>
-                  <InputLabel>To</InputLabel>
-                  <Select value={destLang} label="To" onChange={changeDestLang}>
-                    {langMenuItems}
-                  </Select>
-                </FormControl>
-              </Box>
+              <div>
+                <Box sx={{ width: 180 }}>
+                  <FormControl fullWidth>
+                    <InputLabel>To</InputLabel>
+                    <Select
+                      value={destLang}
+                      label="To"
+                      onChange={changeDestLang}
+                    >
+                      {langMenuItems}
+                    </Select>
+                  </FormControl>
+                </Box>
+              </div>
             </div>
           </div>
 
-          <div className="grid place-items-center mt-12">
+          <div className="grid place-items-center mt-10">
             <Button
               variant="contained"
-              className="bg-prim-light-blue text-prim-dark-blue font-bold max-w-[20px]"
+              size="large"
+              className="bg-prim-light-blue text-prim-dark-blue font-bold"
             >
-              Go!
+              Search
             </Button>
           </div>
         </main>
