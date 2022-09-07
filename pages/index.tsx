@@ -26,7 +26,7 @@ const darkTheme = createTheme({
 const Home: NextPage = () => {
   const [sourceLang, setSourceLang] = React.useState("en-us");
   const [destLang, setDestLang] = React.useState("pt-br");
-  
+
   const changeSourceLang = (event: SelectChangeEvent) => {
     setSourceLang(event.target.value as string);
   };
@@ -36,22 +36,22 @@ const Home: NextPage = () => {
   };
 
   function swapLangs() {
-    const finalSrcLang = destLang
-    const finalDestLang = sourceLang
+    const finalSrcLang = destLang;
+    const finalDestLang = sourceLang;
 
-    setSourceLang(finalSrcLang)
-    setDestLang(finalDestLang)
+    setSourceLang(finalSrcLang);
+    setDestLang(finalDestLang);
   }
 
   const languages = {
     "en-us": {
       code: "en-us",
-      label: "English"
+      label: "English",
     },
     "pt-br": {
       code: "pt-br",
-      label: "Portuguese (BR)"
-    }
+      label: "Portuguese (BR)",
+    },
   };
 
   let langMenuItems: Array<any> = [];
@@ -61,7 +61,7 @@ const Home: NextPage = () => {
       <MenuItem key={obj.code} value={obj.code}>
         {obj.label}
       </MenuItem>
-    )
+    );
   }
 
   let searchQuery = "";
