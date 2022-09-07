@@ -79,23 +79,24 @@ const Home: NextPage = () => {
       <ThemeProvider theme={darkTheme}>
         <CssBaseline />
         <main className={styles.main}>
-          <div className="grid justify-items-center mt-10">
-            <Image
-              src="/logo.png"
-              alt="Clapperboard Logo"
-              height="80"
-              width="80"
-              className="flex justify-items-center"
-            />
+          <div className="grid justify-items-center mt-12">
+            <div className="flex">
+              <Image
+                src="/logo.png"
+                alt="Clapperboard Logo"
+                height="80"
+                width="80"
+                className="flex justify-items-center translate-x-[-5px]"
+              />
+              <h1
+                className={`${styles.title} uppercase font-bold translate-y-[10px] translate-x-[10px]`}
+              >
+                The Movie Title <br /> Translator
+              </h1>
+            </div>
           </div>
 
-          <div className="mt-5">
-            <h1 className={`${styles.title} uppercase font-bold`}>
-              The Movie Title <br /> Translator
-            </h1>
-          </div>
-
-          <div className="grid place-items-center mt-10">
+          <div className="grid place-items-center mt-[100px]">
             <Box
               component="form"
               sx={{
