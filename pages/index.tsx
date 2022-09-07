@@ -6,9 +6,12 @@ import styles from "../styles/Home.module.css";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import Button from "@mui/material/Button";
-import SwapHorizIcon from '@mui/icons-material/SwapHoriz';
+import IconButton from "@mui/material/IconButton";
+import SwapHorizIcon from "@mui/icons-material/SwapHoriz";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
+import InputAdornment from "@mui/material/InputAdornment";
+import SearchIcon from "@mui/icons-material/Search";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
@@ -76,25 +79,51 @@ const Home: NextPage = () => {
       <ThemeProvider theme={darkTheme}>
         <CssBaseline />
         <main className={styles.main}>
-          <div className="grid justify-items-center mt-5">
+          <div className="grid justify-items-center mt-10">
             <Image
               src="/logo.png"
               alt="Clapperboard Logo"
-              height="120"
-              width="120"
+              height="80"
+              width="80"
               className="flex justify-items-center"
             />
           </div>
 
           <div className="mt-5">
             <h1 className={`${styles.title} uppercase font-bold`}>
-              The Movie Title Translator
+              The Movie Title <br /> Translator
             </h1>
           </div>
 
+          <div className="grid place-items-center mt-10">
+            <Box
+              component="form"
+              sx={{
+                "& > :not(style)": { m: 1, minWidth: 350 },
+              }}
+              noValidate
+              autoComplete="off"
+              className="text-prim-white"
+            >
+              <TextField
+                id="outlined-basic"
+                label="Search Movie Title"
+                variant="outlined"
+                className="outline-prim-white"
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <SearchIcon />
+                    </InputAdornment>
+                  ),
+                }}
+              />
+            </Box>
+          </div>
+
           <div className="grid grid-cols-3 justify-content-center mt-5">
-            <div className="">
-              <Box sx={{ minWidth: 60 }}>
+            <div className="grid justify-self-end">
+              <Box sx={{ width: 180 }}>
                 <FormControl fullWidth>
                   <InputLabel>From</InputLabel>
                   <Select
@@ -108,14 +137,14 @@ const Home: NextPage = () => {
               </Box>
             </div>
 
-            <div className="grid place-items-center">
-              <Button variant="outlined" onClick={swapLangs}>
+            <div className="grid justify-self-center">
+              <IconButton onClick={swapLangs}>
                 <SwapHorizIcon></SwapHorizIcon>
-              </Button>
+              </IconButton>
             </div>
 
-            <div className="grid place-items-start">
-              <Box sx={{ minWidth: 200 }}>
+            <div className="grid justify-self-start">
+              <Box sx={{ width: 180 }}>
                 <FormControl fullWidth>
                   <InputLabel>To</InputLabel>
                   <Select value={destLang} label="To" onChange={changeDestLang}>
@@ -126,23 +155,13 @@ const Home: NextPage = () => {
             </div>
           </div>
 
-          <div>
-            <Box
-              component="form"
-              sx={{
-                "& > :not(style)": { m: 1, width: "25ch" },
-              }}
-              noValidate
-              autoComplete="off"
-              className="text-prim-white"
+          <div className="grid place-items-center mt-12">
+            <Button
+              variant="contained"
+              className="bg-prim-light-blue text-prim-dark-blue font-bold max-w-[20px]"
             >
-              <TextField
-                id="outlined-basic"
-                label="Search Movie"
-                variant="outlined"
-                className="outline-prim-white"
-              />
-            </Box>
+              Go!
+            </Button>
           </div>
         </main>
       </ThemeProvider>
