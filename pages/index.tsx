@@ -26,6 +26,8 @@ const darkTheme = createTheme({
 const Home: NextPage = () => {
   const [sourceLang, setSourceLang] = React.useState("en-us");
   const [destLang, setDestLang] = React.useState("pt-br");
+  const [titleSearch, setTitleSearch] = React.useState("");
+  const [data, setData] = React.useState();
 
   const changeSourceLang = (event: SelectChangeEvent) => {
     setSourceLang(event.target.value as string);
@@ -64,7 +66,7 @@ const Home: NextPage = () => {
     );
   }
 
-  let searchQuery = "";
+  // useEffect(() => {
 
   return (
     <div
@@ -110,7 +112,10 @@ const Home: NextPage = () => {
                 id="outlined-basic"
                 label="Search Movie Title"
                 variant="outlined"
+                type="search"
                 className="outline-prim-white"
+                value={titleSearch}
+                onChange={e => {setTitleSearch(e.target.value)}}
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
