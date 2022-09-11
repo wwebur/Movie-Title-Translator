@@ -24,8 +24,8 @@ const darkTheme = createTheme({
 });
 
 const Home: NextPage = () => {
-  const [sourceLang, setSourceLang] = React.useState("en-us");
-  const [destLang, setDestLang] = React.useState("pt-br");
+  const [sourceLang, setSourceLang] = React.useState("en-US");
+  const [destLang, setDestLang] = React.useState("pt-BR");
   const [titleSearch, setTitleSearch] = React.useState("");
   const [data, setData] = React.useState();
 
@@ -46,12 +46,12 @@ const Home: NextPage = () => {
   }
 
   const languages = {
-    "en-us": {
-      code: "en-us",
+    "en-US": {
+      code: "en-US",
       label: "English",
     },
-    "pt-br": {
-      code: "pt-br",
+    "pt-BR": {
+      code: "pt-BR",
       label: "Portuguese (BR)",
     },
   };
