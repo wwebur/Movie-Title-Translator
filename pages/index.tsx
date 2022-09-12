@@ -115,7 +115,9 @@ const Home: NextPage = () => {
                 type="search"
                 className="outline-prim-white"
                 value={titleSearch}
-                onChange={e => {setTitleSearch(e.target.value)}}
+                onChange={(e) => {
+                  setTitleSearch(e.target.value);
+                }}
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
