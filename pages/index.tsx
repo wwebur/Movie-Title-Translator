@@ -2,9 +2,12 @@ import * as React from "react";
 import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
+import axios from "axios";
+
 import styles from "../styles/Home.module.css";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
+
+import { ThemeProvider, createTheme } from "@mui/material/styles";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import SwapHorizIcon from "@mui/icons-material/SwapHoriz";
@@ -16,7 +19,6 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
-import axios from "axios";
 
 const darkTheme = createTheme({
   palette: {
