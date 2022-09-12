@@ -16,6 +16,7 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
+import axios from "axios";
 
 const darkTheme = createTheme({
   palette: {
@@ -23,11 +24,81 @@ const darkTheme = createTheme({
   },
 });
 
+export interface MovieItem {
+  adult: boolean;
+  backdrop_path: string;
+  genre_ids: number[];
+  id: number;
+  original_language: string;
+  original_title: string;
+  overview: string;
+  popularity: number;
+  poster_path: string;
+  release_date: string;
+  title: string;
+  video: boolean;
+  vote_average: number;
+  vote_count: number;
+}
+
+type MovieSearchRes = {
+  page: number;
+  results: MovieItem[];
+  total_pages: number;
+  total_results: number;
+};
+
+type GetMovieRes = {
+  data: MovieSearchRes;
+};
+
+async function getMovies(
+  languageCode: string,
+  searchQuery: string,
+  mdbApiKey: string
+) {
+  try {
+    const { data, status } = await axios.get<GetMovieRes>(
+      `https://api.themoviedb.org/3/search/movie?&page=1&include_adult=false` +
+        `&api_key=${mdbApiKey}` +
+        `&language=${languageCode}` +
+        `&query=${searchQuery}`,
+      {
+        headers: { Accept: "application/json" },
+      }
+    );
+    console.log(">>> status");
+    console.log(status);
+    console.log(">>> data");
+    console.log(data);
+    return data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      console.log("❗Error:", error.message);
+      if (error.response && error.response.data) {
+        const errorResponse: any = error.response.data;
+        if (errorResponse["errors"]) {
+          for (const err of errorResponse["errors"]) {
+            console.log("❗" + err);
+          }
+        }
+        return errorResponse["errors"];
+      }
+      return error;
+    } else {
+      console.log("❗Unexpected error: ", error);
+      return error;
+    }
+  }
+}
+
 const Home: NextPage = () => {
   const [sourceLang, setSourceLang] = React.useState("en-US");
   const [destLang, setDestLang] = React.useState("pt-BR");
   const [titleSearch, setTitleSearch] = React.useState("");
   const [resData, setResData] = React.useState();
+
+  const mdbApi = process.env.NEXT_PUBLIC_MDB_API_KEY;
 
   const changeSourceLang = (event: SelectChangeEvent) => {
     setSourceLang(event.target.value as string);
@@ -66,7 +137,13 @@ const Home: NextPage = () => {
     );
   }
 
-  // useEffect(() => {
+  let movieCards: JSX.Element[] = [];
+
+  function populateMovieCards(searchRes: MovieSearchRes) {
+    for (const movie in searchRes.results) {
+      console.log(movie);
+    }
+  }
 
   return (
     <div
@@ -174,6 +251,9 @@ const Home: NextPage = () => {
               variant="contained"
               size="large"
               className="bg-prim-light-blue text-prim-dark-blue font-bold"
+              onClick={() => {
+                getMovies(sourceLang, titleSearch, mdbApi as string);
+              }}
             >
               Search
             </Button>
