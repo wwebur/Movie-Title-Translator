@@ -27,7 +27,7 @@ const Home: NextPage = () => {
   const [sourceLang, setSourceLang] = React.useState("en-US");
   const [destLang, setDestLang] = React.useState("pt-BR");
   const [titleSearch, setTitleSearch] = React.useState("");
-  const [data, setData] = React.useState();
+  const [resData, setResData] = React.useState();
 
   const changeSourceLang = (event: SelectChangeEvent) => {
     setSourceLang(event.target.value as string);
@@ -56,7 +56,7 @@ const Home: NextPage = () => {
     },
   };
 
-  let langMenuItems: Array<any> = [];
+  let langMenuItems: JSX.Element[] = [];
 
   for (const obj of Object.values(languages)) {
     langMenuItems.push(
