@@ -19,6 +19,11 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import CardActions from "@mui/material/CardActions";
+import Typography from "@mui/material/Typography";
 
 const darkTheme = createTheme({
   palette: {
@@ -26,7 +31,7 @@ const darkTheme = createTheme({
   },
 });
 
-export interface MovieItem {
+export interface MovieItemInterf {
   adult: boolean;
   backdrop_path: string;
   genre_ids: number[];
@@ -43,16 +48,68 @@ export interface MovieItem {
   vote_count: number;
 }
 
-type MovieSearchRes = {
+type MovieSearchResType = {
   page: number;
-  results: MovieItem[];
+  results: MovieItemInterf[];
   total_pages: number;
   total_results: number;
 };
 
-type GetMovieRes = {
-  data: MovieSearchRes;
+type GetMoviesResType = {
+  data: MovieSearchResType;
 };
+
+function populateMovieCards(searchRes: MovieSearchResType) {
+  const smallImgBaseUrl = "https://image.tmdb.org/t/p/w200";
+  let arr = [];
+
+  for (const movie of searchRes.results) {
+    arr.push(
+      <Card
+        key={movie.id}
+        sx={{ display: "flex", maxWidth: "700px" }}
+        className="my-2"
+      >
+        <CardMedia
+          component="img"
+          sx={{ width: 151 }}
+          image={`${smallImgBaseUrl}${movie.poster_path}`}
+          alt="Movie cover"
+        />
+        <Box sx={{ display: "flex", flexDirection: "column" }}>
+          <CardContent sx={{ flex: "1 0 auto" }}>
+            <Typography component="div" variant="h5">
+              {movie.title}
+            </Typography>
+            <Typography
+              variant="subtitle1"
+              color="text.secondary"
+              component="div"
+            >
+              {movie.release_date.slice(0, 4)}
+            </Typography>
+            <Typography
+              variant="subtitle1"
+              color="text.secondary"
+              component="div"
+            >
+              {movie.overview}
+            </Typography>
+            <CardActions className="mt-2 -mb-5">
+              <Button size="small" className="-ml-3">
+                See translation
+              </Button>
+            </CardActions>
+          </CardContent>
+          <Box
+            sx={{ display: "flex", alignItems: "center", pl: 1, pb: 1 }}
+          ></Box>
+        </Box>
+      </Card>
+    );
+  }
+  return arr as JSX.Element[];
+}
 
 async function getMovies(
   languageCode: string,
@@ -60,28 +117,26 @@ async function getMovies(
   mdbApiKey: string
 ) {
   try {
-    const { data, status } = await axios.get<GetMovieRes>(
-      `https://api.themoviedb.org/3/search/movie?&page=1&include_adult=false` +
-        `&api_key=${mdbApiKey}` +
-        `&language=${languageCode}` +
-        `&query=${searchQuery}`,
-      {
-        headers: { Accept: "application/json" },
-      }
+    const { data, status } = await Promise.resolve(
+      axios.get<GetMoviesResType>(
+        `https://api.themoviedb.org/3/search/movie?&page=1&include_adult=false` +
+          `&api_key=${mdbApiKey}` +
+          `&language=${languageCode}` +
+          `&query=${searchQuery}`,
+        {
+          headers: { Accept: "application/json" },
+        }
+      )
     );
-    console.log(">>> status");
-    console.log(status);
-    console.log(">>> data");
-    console.log(data);
-    return data;
+    return data as GetMoviesResType;
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      console.log("❗Error:", error.message);
+      console.log(`❗Error ${error.status}: ${error.message}`);
       if (error.response && error.response.data) {
         const errorResponse: any = error.response.data;
         if (errorResponse["errors"]) {
           for (const err of errorResponse["errors"]) {
-            console.log("❗" + err);
+            console.log(`❗ ${err}`);
           }
         }
         return errorResponse["errors"];
@@ -140,12 +195,6 @@ const Home: NextPage = () => {
   }
 
   let movieCards: JSX.Element[] = [];
-
-  function populateMovieCards(searchRes: MovieSearchRes) {
-    for (const movie in searchRes.results) {
-      console.log(movie);
-    }
-  }
 
   return (
     <div
@@ -254,12 +303,19 @@ const Home: NextPage = () => {
               size="large"
               className="bg-prim-light-blue text-prim-dark-blue font-bold"
               onClick={() => {
-                getMovies(sourceLang, titleSearch, mdbApi as string);
+                getMovies(sourceLang, titleSearch, mdbApi as string).then(
+                  (data) => {
+                    const moviesData: MovieSearchResType = data;
+                    movieCards = populateMovieCards(moviesData);
+                  }
+                );
               }}
             >
               Search
             </Button>
           </div>
+
+          <div className="my-10 grid place-content-center">{movieCards}</div>
         </main>
       </ThemeProvider>
 
