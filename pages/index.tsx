@@ -59,101 +59,11 @@ type GetMoviesResType = {
   data: MovieSearchResType;
 };
 
-function populateMovieCards(searchRes: MovieSearchResType) {
-  const smallImgBaseUrl = "https://image.tmdb.org/t/p/w200";
-  let arr = [];
-
-  for (const movie of searchRes.results) {
-    arr.push(
-      <Card
-        key={movie.id}
-        sx={{ display: "flex", maxWidth: "700px" }}
-        className="my-2"
-      >
-        <CardMedia
-          component="img"
-          sx={{ width: 151 }}
-          image={`${smallImgBaseUrl}${movie.poster_path}`}
-          alt="Movie cover"
-        />
-        <Box sx={{ display: "flex", flexDirection: "column" }}>
-          <CardContent sx={{ flex: "1 0 auto" }}>
-            <Typography component="div" variant="h5">
-              {movie.title}
-            </Typography>
-            <Typography
-              variant="subtitle1"
-              color="text.secondary"
-              component="div"
-            >
-              {movie.release_date.slice(0, 4)}
-            </Typography>
-            <Typography
-              variant="subtitle1"
-              color="text.secondary"
-              component="div"
-            >
-              {movie.overview}
-            </Typography>
-            <CardActions className="mt-2 -mb-5">
-              <Button size="small" className="-ml-3">
-                See translation
-              </Button>
-            </CardActions>
-          </CardContent>
-          <Box
-            sx={{ display: "flex", alignItems: "center", pl: 1, pb: 1 }}
-          ></Box>
-        </Box>
-      </Card>
-    );
-  }
-  return arr as JSX.Element[];
-}
-
-async function getMovies(
-  languageCode: string,
-  searchQuery: string,
-  mdbApiKey: string
-) {
-  try {
-    const { data, status } = await Promise.resolve(
-      axios.get<GetMoviesResType>(
-        `https://api.themoviedb.org/3/search/movie?&page=1&include_adult=false` +
-          `&api_key=${mdbApiKey}` +
-          `&language=${languageCode}` +
-          `&query=${searchQuery}`,
-        {
-          headers: { Accept: "application/json" },
-        }
-      )
-    );
-    return data as GetMoviesResType;
-  } catch (error) {
-    if (axios.isAxiosError(error)) {
-      console.log(`❗Error ${error.status}: ${error.message}`);
-      if (error.response && error.response.data) {
-        const errorResponse: any = error.response.data;
-        if (errorResponse["errors"]) {
-          for (const err of errorResponse["errors"]) {
-            console.log(`❗ ${err}`);
-          }
-        }
-        return errorResponse["errors"];
-      }
-      return error;
-    } else {
-      console.log("❗Unexpected error: ", error);
-      return error;
-    }
-  }
-}
-
 const Home: NextPage = () => {
   const [sourceLang, setSourceLang] = React.useState("en-US");
   const [destLang, setDestLang] = React.useState("pt-BR");
   const [titleSearch, setTitleSearch] = React.useState("");
-  const [resData, setResData] = React.useState();
+  const [movieCards, setMovieCards] = React.useState([]);
 
   const mdbApi = process.env.NEXT_PUBLIC_MDB_API_KEY;
 
@@ -171,6 +81,122 @@ const Home: NextPage = () => {
 
     setSourceLang(finalSrcLang);
     setDestLang(finalDestLang);
+  }
+
+  function populateMovieCards(searchRes: MovieSearchResType) {
+    const smallImgBaseUrl = "https://image.tmdb.org/t/p/w200";
+    let arr = [];
+
+    for (const movie of searchRes.results) {
+      let imgPath: string;
+      let overview: string;
+
+      if (movie.poster_path === null) {
+        if (movie.backdrop_path === null) {
+          imgPath = "/no-image-available.png";
+        } else {
+          imgPath = `${smallImgBaseUrl}${movie.backdrop_path}`;
+        }
+      } else {
+        imgPath = `${smallImgBaseUrl}${movie.poster_path}`;
+      }
+
+      console.log(">>> ");
+      console.log();
+
+      if (movie.overview === null) {
+        overview = "No overview avaliable";
+      } else if (movie.overview.length > 170) {
+        overview = movie.overview.substring(0, 170);
+        overview = overview.substring(0, overview.lastIndexOf(" "));
+        overview += "...";
+      } else {
+        overview = movie.overview;
+      }
+
+      arr.push(
+        <Card
+          key={movie.id}
+          sx={{ display: "flex", maxWidth: "700px" }}
+          className="my-2"
+        >
+          <CardMedia
+            component="img"
+            sx={{ width: 151 }}
+            image={imgPath}
+            alt="Movie cover"
+          />
+          <Box sx={{ display: "flex", flexDirection: "column" }}>
+            <CardContent sx={{ flex: "1 0 auto" }}>
+              <Typography component="div" variant="h5">
+                {movie.title}
+              </Typography>
+              <Typography
+                variant="subtitle1"
+                color="text.secondary"
+                component="div"
+              >
+                {movie.release_date.slice(0, 4)}
+              </Typography>
+              <Typography
+                variant="subtitle1"
+                color="text.secondary"
+                component="div"
+              >
+                {overview}
+              </Typography>
+              <CardActions className="mt-2 -mb-5">
+                <Button size="small" className="-ml-3">
+                  See translation
+                </Button>
+              </CardActions>
+            </CardContent>
+            <Box
+              sx={{ display: "flex", alignItems: "center", pl: 1, pb: 1 }}
+            ></Box>
+          </Box>
+        </Card>
+      );
+    }
+    return arr;
+  }
+
+  async function getMovies(
+    languageCode: string,
+    searchQuery: string,
+    mdbApiKey: string
+  ) {
+    try {
+      const { data, status } = await Promise.resolve(
+        axios.get<GetMoviesResType>(
+          `https://api.themoviedb.org/3/search/movie?&page=1&include_adult=false` +
+            `&api_key=${mdbApiKey}` +
+            `&language=${languageCode}` +
+            `&query=${searchQuery}`,
+          {
+            headers: { Accept: "application/json" },
+          }
+        )
+      );
+      return data;
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        console.log(`❗Error ${error.status}: ${error.message}`);
+        if (error.response && error.response.data) {
+          const errorResponse: any = error.response.data;
+          if (errorResponse["errors"]) {
+            for (const err of errorResponse["errors"]) {
+              console.log(`❗ ${err}`);
+            }
+          }
+          return errorResponse["errors"];
+        }
+        return error;
+      } else {
+        console.log("❗Unexpected error: ", error);
+        return error;
+      }
+    }
   }
 
   const languages = {
@@ -305,8 +331,9 @@ const Home: NextPage = () => {
               onClick={() => {
                 getMovies(sourceLang, titleSearch, mdbApi as string).then(
                   (data) => {
-                    const moviesData: MovieSearchResType = data;
-                    movieCards = populateMovieCards(moviesData);
+                    const moviesData: any = data;
+                    const movieCardsArr: any = populateMovieCards(moviesData);
+                    setMovieCards(movieCardsArr);
                   }
                 );
               }}
