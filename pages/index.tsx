@@ -233,7 +233,7 @@ const Home: NextPage = () => {
       </Head>
 
       <ThemeProvider theme={darkTheme}>
-        <CssBaseline />
+        <CssBaseline enableColorScheme />
         <main className={styles.main}>
           <div className="grid justify-items-center mt-12">
             <div className="flex">
