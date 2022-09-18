@@ -101,10 +101,7 @@ const Home: NextPage = () => {
         imgPath = `${smallImgBaseUrl}${movie.poster_path}`;
       }
 
-      console.log(">>> ");
-      console.log();
-
-      if (movie.overview === null) {
+      if (movie.overview.length === 0 || movie.overview === null) {
         overview = "No overview avaliable";
       } else if (movie.overview.length > 170) {
         overview = movie.overview.substring(0, 170);
