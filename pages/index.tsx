@@ -227,6 +227,10 @@ const Home: NextPage = () => {
         <title>Movie Title Translator</title>
         <meta name="description" content="Accurate movie title translations" />
         <link rel="icon" href="/favicon.ico" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Oswald:wght@400&display=block"
+          rel="stylesheet"
+        />
       </Head>
 
       <ThemeProvider theme={darkTheme}>
@@ -242,7 +246,7 @@ const Home: NextPage = () => {
                 className="flex justify-items-center translate-x-[-5px]"
               />
               <h1
-                className={`${styles.title} uppercase font-bold translate-y-[10px] translate-x-[10px]`}
+                className={`${styles.title} uppercase translate-y-[7px] translate-x-[10px]`}
               >
                 The Movie Title <br /> Translator
               </h1>
