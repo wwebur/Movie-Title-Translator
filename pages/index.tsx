@@ -25,6 +25,8 @@ import CardMedia from "@mui/material/CardMedia";
 import CardActions from "@mui/material/CardActions";
 import Typography from "@mui/material/Typography";
 
+import MovieButtonModal from "../components/MovieButtonModal";
+
 const darkTheme = createTheme({
   palette: {
     mode: "dark",
@@ -142,10 +144,9 @@ const Home: NextPage = () => {
               >
                 {overview}
               </Typography>
-              <CardActions className="mt-2 -mb-5">
-                <Button size="small" className="-ml-3">
-                  See translation
-                </Button>
+              {/* TODO: Make the button on the right */}
+              <CardActions className="mt-2 -mb-5 pl-0 ml-0">
+                <MovieButtonModal></MovieButtonModal>
               </CardActions>
             </CardContent>
             <Box
