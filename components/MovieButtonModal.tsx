@@ -59,7 +59,9 @@ const MovieButtonModal = (props: MovieButtonModalProps) => {
         onClose={handleClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
-        className={styles.modal}
+        className={styles.dialog}
+        maxWidth="md"
+        fullWidth
       >
         <div className={styles.container}>
           <nav id="nav" className={styles.nav}>
@@ -76,9 +78,6 @@ const MovieButtonModal = (props: MovieButtonModalProps) => {
           </div>
           <div id="content2" className={styles.content2}>
             Content2
-          </div>
-          <div id="content3" className={styles.content3}>
-            Content3
           </div>
           <footer id="footer" className={styles.footer}>
             Footer
