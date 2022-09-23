@@ -6,17 +6,15 @@ $dark-gray: #121212;
   display: grid;
   height: 100vh;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 0.2fr 0.2fr 1.2fr 0.2fr;
+  grid-template-rows: 0.2fr 0.2fr 0.2fr 1.2fr 0.2fr;
   grid-template-areas:
     "nav nav nav"
-    "sidebar content1 content2"
-    "sidebar main main"
+    "poster title title"
+    "poster info score"
+    "poster overview overview"
     "footer footer footer";
   grid-gap: 0.2rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  font-size: 12px;
-  color: #000000;
+  color: #ffffff;
   text-align: center;
 }
 
@@ -27,30 +25,37 @@ $dark-gray: #121212;
   padding-top: var($main-padding);
 }
 
-.main {
+.overview {
   background: $dark-gray;
-  grid-area: main;
+  grid-area: overview;
   border-radius: var($main-radius);
   padding-top: var($main-padding);
 }
 
-.sidebar {
+.poster {
   background: $dark-gray;
-  grid-area: sidebar;
+  grid-area: poster;
   border-radius: var($main-radius);
   padding-top: var($main-padding);
 }
 
-.content1 {
+.title {
   background: $dark-gray;
-  grid-area: content1;
+  grid-area: title;
   border-radius: var($main-radius);
   padding-top: var($main-padding);
 }
 
-.content2 {
+.info {
   background: $dark-gray;
-  grid-area: content2;
+  grid-area: info;
+  border-radius: var($main-radius);
+  padding-top: var($main-padding);
+}
+
+.score {
+  background: $dark-gray;
+  grid-area: score;
   border-radius: var($main-radius);
   padding-top: var($main-padding);
 }
@@ -68,10 +73,11 @@ $dark-gray: #121212;
     grid-template-rows: 0.4fr 0.4fr 2.2fr 1.2fr 1.2fr 1.2fr 1fr;
     grid-template-areas:
       "nav"
-      "sidebar"
-      "main"
-      "content1"
-      "content2"
+      "poster"
+      "title"
+      "info"
+      "score"
+      "description"
       "footer";
   }
 }

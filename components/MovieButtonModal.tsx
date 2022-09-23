@@ -67,17 +67,22 @@ const MovieButtonModal = (props: MovieButtonModalProps) => {
           <nav id="nav" className={styles.nav}>
             Navbar
           </nav>
-          <main id="main" className={styles.main}>
-            Main
-          </main>
-          <div id="sidebar" className={styles.sidebar}>
-            Sidebar
+          <div id="overview" className={styles.overview}>
+            <p>Overview</p>
+            <p>Directors, Actors, etc.</p>
           </div>
-          <div id="content1" className={styles.content1}>
-            Content1
+          <div id="poster" className={styles.poster}>
+            Movie Poster
           </div>
-          <div id="content2" className={styles.content2}>
-            Content2
+          <div id="title" className={styles.title}>
+            Title
+          </div>
+          <div id="info" className={styles.info}>
+            <p>Info: genres, 52m or 1h30m</p>
+            <p>Original language</p>
+          </div>
+          <div id="score" className={styles.score}>
+            100% User Score
           </div>
           <footer id="footer" className={styles.footer}>
             Footer
