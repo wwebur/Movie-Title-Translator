@@ -354,7 +354,8 @@ const Home: NextPage = () => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          {new Date().getFullYear()} -<span className="ml-1">Amaral, T.P.</span>
+          {new Date().getFullYear()} -
+          <span className="ml-1">Amaral, T. P.</span>
         </a>
       </footer>
     </div>
