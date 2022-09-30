@@ -146,7 +146,11 @@ const Home: NextPage = () => {
               </Typography>
               {/* TODO: Make the button on the right */}
               <CardActions className="mt-2 -mb-5 pl-0 ml-0">
-                <MovieButtonModal></MovieButtonModal>
+                <MovieButtonModal
+                  movieId={movie.id}
+                  language={destLang}
+                  btnLabel="See Translation"
+                ></MovieButtonModal>
               </CardActions>
             </CardContent>
             <Box
@@ -273,6 +277,19 @@ const Home: NextPage = () => {
                 value={titleSearch}
                 onChange={(e) => {
                   setTitleSearch(e.target.value);
+                }}
+                onKeyPress={(e) => {
+                  if (e.key === "Enter") {
+                    e.preventDefault();
+                    getMovies(sourceLang, titleSearch, mdbApi as string).then(
+                      (data) => {
+                        const moviesData: any = data;
+                        const movieCardsArr: any =
+                          populateMovieCards(moviesData);
+                        setMovieCards(movieCardsArr);
+                      }
+                    );
+                  }
                 }}
                 InputProps={{
                   startAdornment: (
