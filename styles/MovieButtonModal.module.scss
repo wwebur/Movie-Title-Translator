@@ -30,6 +30,8 @@ $dark-gray: #121212;
   grid-area: overview;
   border-radius: var($main-radius);
   padding-top: var($main-padding);
+  
+  text-align: start;
 }
 
 .poster {
