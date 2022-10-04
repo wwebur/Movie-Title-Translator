@@ -25,29 +25,87 @@ export interface MovieButtonModalProps {
   btnLabel?: string;
 }
 
-const MovieButtonModal = (props: MovieButtonModalProps) => {
+interface MovieTranslate {
+  id: number;
+  title: string;
+  poster_path: string;
+  backdrop_path: string;
+  genres: [
+    {
+      id: number;
+      name: string;
+    }
+  ];
+  overview: string;
+  imdb_id: string;
+  original_language: string;
+  original_title: string;
+  release_date: string;
+  runtime: number;
+  vote_average: number;
+  [key: string]: any;
+}
+
+const emptyMovieTranslateObj = {
+  id: 0,
+  title: "",
+  poster_path: "",
+  backdrop_path: "",
+  genres: [
+    {
+      id: 0,
+      name: "",
+    },
+  ],
+  overview: "",
+  imdb_id: "",
+  original_language: "",
+  original_title: "",
+  release_date: "",
+  runtime: 0,
+  vote_average: 0,
+};
+
+interface MovieTranslateRes {
+  data: MovieTranslate;
+}
+
+function MovieButtonModal(props: MovieButtonModalProps) {
   const [open, setOpen] = React.useState(false);
+  const [data, setData] = React.useState(emptyMovieTranslateObj);
+  const [genres, setGenres] = React.useState([] as string[]);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   const movieId = props.movieId;
   const language = props.language;
-  const btnLabel = props.btnLabel || "See Details";
-
-  const [sourceLang, setSourceLang] = React.useState("en-US");
-  const [destLang, setDestLang] = React.useState("pt-BR");
-  const [titleSearch, setTitleSearch] = React.useState("");
-  const [movieCards, setMovieCards] = React.useState([]);
-
   const mdbApi = process.env.NEXT_PUBLIC_MDB_API_KEY;
 
-  const changeSourceLang = (event: SelectChangeEvent) => {
-    setSourceLang(event.target.value as string);
-  };
+  const url = `https://api.themoviedb.org/3/movie/${movieId}?&api_key=${mdbApi}&language=${language}`;
 
-  const changeDestLang = (event: SelectChangeEvent) => {
-    setDestLang(event.target.value as string);
-  };
+  React.useEffect(() => {
+    axios.get(url).then((response) => {
+      setData(response.data);
+
+      let genresNamesArr: any = [];
+      for (let genre of data.genres) {
+        console.log(genre.name);
+      }
+
+      for (let genre of data.genres) {
+        console.log(">>> 118");
+        genresNamesArr.push(genre.name);
+      }
+      setGenres(genresNamesArr);
+
+      console.log(">>> response");
+      console.log(response);
+    });
+  }, []);
+
+  // const mData:
+
+  const btnLabel = props.btnLabel || "See Details";
 
   return (
     <>
@@ -70,19 +128,34 @@ const MovieButtonModal = (props: MovieButtonModalProps) => {
           <div id="overview" className={styles.overview}>
             <p>Overview</p>
             <p>Directors, Actors, etc.</p>
+            <p>{data.overview}</p>
           </div>
           <div id="poster" className={styles.poster}>
-            Movie Poster
+            <img
+              src={
+                data.poster_path
+                  ? `https://image.tmdb.org/t/p/w200${data.poster_path}`
+                  : "/no-image-available.png"
+              }
+            />
           </div>
           <div id="title" className={styles.title}>
-            Title
+            {data.title}
           </div>
           <div id="info" className={styles.info}>
-            <p>Info: genres, 52m or 1h30m</p>
-            <p>Original language</p>
+            <p>
+              {`${data.runtime} min | ${String(genres).replace(",", ", ")}`}
+            </p>
+            <p></p>
+            <p>Original Language: {data.original_language}</p>
+            <p></p>
           </div>
           <div id="score" className={styles.score}>
-            100% User Score
+            <p>
+              {data.vote_average
+                ? `${Math.round(data.vote_average * 10)}%`
+                : "N/A"}
+            </p>
           </div>
           <footer id="footer" className={styles.footer}>
             Footer
@@ -95,6 +168,6 @@ const MovieButtonModal = (props: MovieButtonModalProps) => {
       </Dialog>
     </>
   );
-};
+}
 
 export default MovieButtonModal;
