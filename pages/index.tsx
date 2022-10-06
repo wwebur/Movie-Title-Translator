@@ -144,7 +144,6 @@ const Home: NextPage = () => {
               >
                 {overview}
               </Typography>
-              {/* TODO: Make the button on the right */}
               <CardActions className="mt-2 -mb-5 pl-0 ml-0">
                 <MovieButtonModal
                   movieId={movie.id}
@@ -222,12 +221,8 @@ const Home: NextPage = () => {
     );
   }
 
-  let movieCards: JSX.Element[] = [];
-
   return (
-    <div
-      className={`${styles.container} grid content-between bg-prim-dark-blue text-prim-white`}
-    >
+    <div className={`${styles.container} bg-prim-dark-blue text-prim-white`}>
       <Head>
         <title>Movie Title Translator</title>
         <meta name="description" content="Accurate movie title translations" />
@@ -241,39 +236,33 @@ const Home: NextPage = () => {
       <ThemeProvider theme={darkTheme}>
         <CssBaseline enableColorScheme />
         <main className={styles.main}>
-          <div className="grid justify-items-center mt-12">
-            <div className="flex">
-              <Image
-                src="/logo.png"
-                alt="Clapperboard Logo"
-                height="80"
-                width="80"
-                className="flex justify-items-center translate-x-[-5px]"
-              />
-              <h1
-                className={`${styles.title} uppercase translate-y-[7px] translate-x-[10px]`}
-              >
-                The Movie Title <br /> Translator
-              </h1>
-            </div>
+          <div className={`${styles.theLogo} grid justify-items-center`}>
+            <Image
+              src="/logo.png"
+              alt="Clapperboard Logo"
+              height="80"
+              width="80"
+              className={styles.clapperboardImg}
+            />
+            <h1 className={`${styles.title}`}>
+              The Movie Title <br /> Translator
+            </h1>
           </div>
 
-          <div className="grid place-items-center mt-[100px]">
+          <div className={`${styles.searchBox}`}>
             <Box
               component="form"
-              sx={{
-                "& > :not(style)": { m: 1, minWidth: 408 },
-              }}
+              sx={{}}
               noValidate
               autoComplete="off"
               className="text-prim-white"
             >
               <TextField
                 id="outlined-basic"
+                className={styles.searchTextField}
                 label="Search Movie Title"
                 variant="outlined"
                 type="search"
-                className="outline-prim-white"
                 value={titleSearch}
                 onChange={(e) => {
                   setTitleSearch(e.target.value);
@@ -302,47 +291,39 @@ const Home: NextPage = () => {
             </Box>
           </div>
 
-          <div className="grid place-content-center mt-3">
-            <div className="flex">
-              <div>
-                <Box sx={{ width: 180 }}>
-                  <FormControl fullWidth>
-                    <InputLabel>From</InputLabel>
-                    <Select
-                      value={sourceLang}
-                      label="From"
-                      onChange={changeSourceLang}
-                    >
-                      {langMenuItems}
-                    </Select>
-                  </FormControl>
-                </Box>
-              </div>
-
-              <div className="mt-2 ml-1 mr-1">
-                <IconButton onClick={swapLangs}>
-                  <SwapHorizIcon></SwapHorizIcon>
-                </IconButton>
-              </div>
-
-              <div>
-                <Box sx={{ width: 180 }}>
-                  <FormControl fullWidth>
-                    <InputLabel>To</InputLabel>
-                    <Select
-                      value={destLang}
-                      label="To"
-                      onChange={changeDestLang}
-                    >
-                      {langMenuItems}
-                    </Select>
-                  </FormControl>
-                </Box>
-              </div>
-            </div>
+          <div className={styles.sourceLang}>
+            <Box sx={{}}>
+              <FormControl fullWidth>
+                <InputLabel>From</InputLabel>
+                <Select
+                  value={sourceLang}
+                  label="From"
+                  onChange={changeSourceLang}
+                >
+                  {langMenuItems}
+                </Select>
+              </FormControl>
+            </Box>
           </div>
 
-          <div className="grid place-items-center mt-10">
+          <div className={`${styles.switchLangBtn}`}>
+            <IconButton onClick={swapLangs}>
+              <SwapHorizIcon></SwapHorizIcon>
+            </IconButton>
+          </div>
+
+          <div className={styles.destLang}>
+            <Box sx={{}}>
+              <FormControl fullWidth>
+                <InputLabel>To</InputLabel>
+                <Select value={destLang} label="To" onChange={changeDestLang}>
+                  {langMenuItems}
+                </Select>
+              </FormControl>
+            </Box>
+          </div>
+
+          <div className={`${styles.searchBtn} grid place-items-center`}>
             <Button
               variant="contained"
               size="large"
@@ -361,7 +342,7 @@ const Home: NextPage = () => {
             </Button>
           </div>
 
-          <div className="my-10 grid place-content-center">{movieCards}</div>
+          <div className="grid place-content-center">{movieCards}</div>
         </main>
       </ThemeProvider>
 
