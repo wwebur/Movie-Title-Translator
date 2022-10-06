@@ -106,6 +106,8 @@ $default-space: 25px;
 
 // All devices
 .container {
+  display: flex;
+  flex-direction: column;
   min-height: 100vh;
   padding: $default-space $default-space 0 $default-space;
 }
@@ -129,9 +131,10 @@ $default-space: 25px;
 }
 
 .footer {
-  position: absolute;
-  bottom: 0;
-  width: calc(100% - (2 * $default-space));
+  position: relative;
+  bottom: 10px;
+  margin-top: auto;
+  width: 100%;
   padding: 1rem 0;
   border-top: 1px solid #eaeaea;
 
