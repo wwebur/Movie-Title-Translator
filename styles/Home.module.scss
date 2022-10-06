@@ -64,6 +64,7 @@ $default-space: 25px;
       "search-btn search-btn search-btn";
     grid-gap: 0.2rem;
     text-align: center;
+    padding: 0 30vw 0 30vw;
   }
   
   .theLogo {
@@ -72,23 +73,34 @@ $default-space: 25px;
   
   .searchBox {
     grid-area: search-box;
-    margin-top: 100px;
+    margin-top: calc(2 * $default-space);
+    margin-bottom: $default-space;
+  }
+
+  .searchTextField {
+    width: 100%;
   }
   
   .sourceLang {
     grid-area: source-lang;
+    width: 100%;
+    text-align: left;
   }
   
   .switchLangBtn {
     grid-area: switch-lang-btn;
+    align-self: center;
   }
   
   .destLang {
     grid-area: dest-lang;
+    width: 100%;
+    text-align: left;
   }
   
   .searchBtn {
     grid-area: search-btn;
+    margin-top: calc(2 * $default-space);
   }
 }
 
@@ -113,11 +125,7 @@ $default-space: 25px;
   font-size: 32px;
   font-family: "Oswald", "Helvetica", "Roboto";
   text-align: center;
-
-  // >>> desktop
-  // uppercase
-  // translate-x-[10px]
-  // translate-y-[7px] 
+  text-transform: uppercase;
 }
 
 .footer {
