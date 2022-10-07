@@ -141,10 +141,11 @@ const Home: NextPage = () => {
                 variant="subtitle1"
                 color="text.secondary"
                 component="div"
+                className={styles.movieOverview}
               >
                 {overview}
               </Typography>
-              <CardActions className="mt-2 -mb-5 pl-0 ml-0">
+              <CardActions className={styles.cardActions}>
                 <MovieButtonModal
                   movieId={movie.id}
                   language={destLang}
@@ -342,7 +343,9 @@ const Home: NextPage = () => {
             </Button>
           </div>
 
-          <div className="grid place-content-center">{movieCards}</div>
+          <div className={`${styles.movieCards} grid place-content-center`}>
+            {movieCards}
+          </div>
         </main>
       </ThemeProvider>
 

@@ -2,73 +2,7 @@ $main-radius: 5px;
 $main-padding: 5px;
 $dark-gray: #121212;
 
-.container {
-  display: grid;
-  height: 100vh;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 0.2fr 0.2fr 0.2fr 1.2fr 0.2fr;
-  grid-template-areas:
-    "nav nav nav"
-    "poster title title"
-    "poster info score"
-    "poster overview overview"
-    "footer footer footer";
-  grid-gap: 0.2rem;
-  color: #ffffff;
-  text-align: center;
-}
-
-.nav {
-  background: $dark-gray;
-  grid-area: nav;
-  border-radius: var($main-radius);
-  padding-top: var($main-padding);
-}
-
-.overview {
-  background: $dark-gray;
-  grid-area: overview;
-  border-radius: var($main-radius);
-  padding-top: var($main-padding);
-  
-  text-align: start;
-}
-
-.poster {
-  background: $dark-gray;
-  grid-area: poster;
-  border-radius: var($main-radius);
-  padding-top: var($main-padding);
-}
-
-.title {
-  background: $dark-gray;
-  grid-area: title;
-  border-radius: var($main-radius);
-  padding-top: var($main-padding);
-}
-
-.info {
-  background: $dark-gray;
-  grid-area: info;
-  border-radius: var($main-radius);
-  padding-top: var($main-padding);
-}
-
-.score {
-  background: $dark-gray;
-  grid-area: score;
-  border-radius: var($main-radius);
-  padding-top: var($main-padding);
-}
-
-.footer {
-  background: $dark-gray;
-  grid-area: footer;
-  border-radius: var($main-radius);
-  padding-top: var($main-padding);
-}
-
+// Mobile devices
 @media only screen and (max-width: 550px) {
   .container {
     grid-template-columns: 1fr;
@@ -81,5 +15,126 @@ $dark-gray: #121212;
       "score"
       "description"
       "footer";
+  }
+
+  .nav {
+    background: $dark-gray;
+    grid-area: nav;
+    border-radius: var($main-radius);
+    padding-top: var($main-padding);
+  }
+  
+  .overview {
+    background: $dark-gray;
+    grid-area: overview;
+    border-radius: var($main-radius);
+    padding-top: var($main-padding);
+    
+    text-align: start;
+  }
+  
+  .poster {
+    background: $dark-gray;
+    grid-area: poster;
+    border-radius: var($main-radius);
+    padding-top: var($main-padding);
+  }
+  
+  .title {
+    background: $dark-gray;
+    grid-area: title;
+    border-radius: var($main-radius);
+    padding-top: var($main-padding);
+  }
+  
+  .info {
+    background: $dark-gray;
+    grid-area: info;
+    border-radius: var($main-radius);
+    padding-top: var($main-padding);
+  }
+  
+  .score {
+    background: $dark-gray;
+    grid-area: score;
+    border-radius: var($main-radius);
+    padding-top: var($main-padding);
+  }
+  
+  .footer {
+    background: $dark-gray;
+    grid-area: footer;
+    border-radius: var($main-radius);
+    padding-top: var($main-padding);
+  }
+}
+
+// Desktop Devices
+@media only screen and (min-width: 551px) {
+  .container {
+    display: grid;
+    height: 100vh;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 0.2fr 0.2fr 0.2fr 1.2fr 0.2fr;
+    grid-template-areas:
+      "nav nav nav"
+      "poster title title"
+      "poster info score"
+      "poster overview overview"
+      "footer footer footer";
+    grid-gap: 0.2rem;
+    color: #ffffff;
+    text-align: center;
+  }
+
+  .nav {
+    background: $dark-gray;
+    grid-area: nav;
+    border-radius: var($main-radius);
+    padding-top: var($main-padding);
+  }
+  
+  .overview {
+    background: $dark-gray;
+    grid-area: overview;
+    border-radius: var($main-radius);
+    padding-top: var($main-padding);
+    
+    text-align: start;
+  }
+  
+  .poster {
+    background: $dark-gray;
+    grid-area: poster;
+    border-radius: var($main-radius);
+    padding-top: var($main-padding);
+  }
+  
+  .title {
+    background: $dark-gray;
+    grid-area: title;
+    border-radius: var($main-radius);
+    padding-top: var($main-padding);
+  }
+  
+  .info {
+    background: $dark-gray;
+    grid-area: info;
+    border-radius: var($main-radius);
+    padding-top: var($main-padding);
+  }
+  
+  .score {
+    background: $dark-gray;
+    grid-area: score;
+    border-radius: var($main-radius);
+    padding-top: var($main-padding);
+  }
+  
+  .footer {
+    background: $dark-gray;
+    grid-area: footer;
+    border-radius: var($main-radius);
+    padding-top: var($main-padding);
   }
 }

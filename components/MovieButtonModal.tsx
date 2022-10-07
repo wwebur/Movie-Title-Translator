@@ -88,18 +88,7 @@ function MovieButtonModal(props: MovieButtonModalProps) {
       setData(response.data);
 
       let genresNamesArr: any = [];
-      for (let genre of data.genres) {
-        console.log(genre.name);
-      }
-
-      for (let genre of data.genres) {
-        console.log(">>> 118");
-        genresNamesArr.push(genre.name);
-      }
       setGenres(genresNamesArr);
-
-      console.log(">>> response");
-      console.log(response);
     });
   }, []);
 
@@ -109,7 +98,7 @@ function MovieButtonModal(props: MovieButtonModalProps) {
 
   return (
     <>
-      <Button size="small" onClick={handleOpen}>
+      <Button size="small" onClick={handleOpen} className="text-left">
         {btnLabel}
       </Button>
       <Dialog

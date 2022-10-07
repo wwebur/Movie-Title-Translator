@@ -1,7 +1,7 @@
 $default-space: 25px;
 
 // Mobile devices
-@media only screen and (max-width: 475px) {
+@media only screen and (max-width: 550px) {
   .main {
     grid-template-columns: 1fr;
     grid-template-rows: auto auto auto auto auto auto;
@@ -11,7 +11,8 @@ $default-space: 25px;
       "source-lang"
       "switch-lang-btn"
       "dest-lang"
-      "search-btn";
+      "search-btn"
+      "movie-cards";
   }
   
   .theLogo {
@@ -50,10 +51,21 @@ $default-space: 25px;
     margin-top: 30px;
     margin-bottom: 30px;
   }
+
+  .movieOverview {
+    display: none;
+  }
+  
+  .cardActions {
+    margin-top: calc(2 * 0.25rem);
+    // margin-bottom: calc(-5 * 0.25rem);
+    padding-left: 0;
+    margin-left: calc(-1 * 0.25rem);
+  }
 }
 
 // Desktop devices
-@media only screen and (min-width: 476px) {
+@media only screen and (min-width: 551px) {
   .main {
     display: grid;
     grid-template-columns: 1fr 0.1fr 1fr;
@@ -61,7 +73,8 @@ $default-space: 25px;
       "the-logo the-logo the-logo"
       "search-box search-box search-box"
       "source-lang switch-lang-btn dest-lang"
-      "search-btn search-btn search-btn";
+      "search-btn search-btn search-btn"
+      "movie-cards movie-cards movie-cards";
     grid-gap: 0.2rem;
     text-align: center;
     padding: 0 30vw 0 30vw;
@@ -102,6 +115,17 @@ $default-space: 25px;
     grid-area: search-btn;
     margin-top: calc(2 * $default-space);
   }
+
+  .movieOverview {
+    display: block;
+  }
+
+  .cardActions {
+    margin-top: calc(2 * 0.25rem);
+    margin-bottom: calc(-5 * 0.25rem);
+    padding-left: 0;
+    margin-left: calc(-1 * 0.25rem);
+  }
 }
 
 // All devices
@@ -128,6 +152,13 @@ $default-space: 25px;
   font-family: "Oswald", "Helvetica", "Roboto";
   text-align: center;
   text-transform: uppercase;
+}
+
+.movieCards {
+  grid-area: movie-cards;
+  text-align: left;
+  margin-top: $default-space;
+  margin-bottom: $default-space;
 }
 
 .footer {
