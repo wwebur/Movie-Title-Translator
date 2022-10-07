@@ -146,9 +146,6 @@ function MovieButtonModal(props: MovieButtonModalProps) {
                 : "N/A"}
             </p>
           </div>
-          <footer id="footer" className={styles.footer}>
-            Footer
-          </footer>
         </div>
 
         <DialogActions>
