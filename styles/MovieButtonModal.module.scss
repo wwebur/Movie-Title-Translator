@@ -2,6 +2,9 @@ $main-radius: 5px;
 $main-padding: 5px;
 $dark-gray: #121212;
 
+$modal-title-font-size: 24px;
+$modal-text-font-size: 18px;
+
 // Mobile devices
 @media only screen and (max-width: 550px) {
   .container {
@@ -21,6 +24,9 @@ $dark-gray: #121212;
     grid-area: nav;
     border-radius: var($main-radius);
     padding-top: var($main-padding);
+    text-align: end;
+    padding-right: 10px;
+    align-self: center;
   }
   
   .overview {
@@ -63,62 +69,86 @@ $dark-gray: #121212;
 
 // Desktop Devices
 @media only screen and (min-width: 551px) {
+  .dialog {
+    display: flex;
+    place-content: center;
+    max-height: 700px !important;
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+
   .container {
     display: grid;
     height: 100vh;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 0.2fr 0.2fr 0.2fr 1.2fr;
     grid-template-areas:
-      "nav nav nav"
-      "poster title title"
-      "poster info score"
-      "poster overview overview";
+    "nav nav nav"
+    "poster title title"
+    "poster score info"
+    "poster overview overview";
     grid-gap: 0.2rem;
+    background: $dark-gray;
     color: #ffffff;
     text-align: center;
+    padding: 10px;
   }
 
   .nav {
-    background: $dark-gray;
     grid-area: nav;
     border-radius: var($main-radius);
     padding-top: var($main-padding);
+    text-align: end;
+    padding-right: 10px;
+    align-self: center;
   }
   
   .overview {
-    background: $dark-gray;
     grid-area: overview;
     border-radius: var($main-radius);
-    padding-top: var($main-padding);
+    padding-top: 0.5rem;
     
     text-align: start;
+    font-size: $modal-text-font-size;
   }
   
   .poster {
-    background: $dark-gray;
     grid-area: poster;
     border-radius: var($main-radius);
     padding-top: var($main-padding);
+    align-self: start;
+    justify-self: center;
+    flex: 0 0 auto;
+    padding: 1rem;
   }
   
   .title {
-    background: $dark-gray;
     grid-area: title;
     border-radius: var($main-radius);
     padding-top: var($main-padding);
+
+    font-size: $modal-title-font-size;
+    align-self: center;
+    font-weight: 600;
   }
   
   .info {
-    background: $dark-gray;
     grid-area: info;
     border-radius: var($main-radius);
     padding-top: var($main-padding);
+
+    text-align: left;
+    display: grid;
+    align-content: space-around;
   }
   
   .score {
-    background: $dark-gray;
     grid-area: score;
     border-radius: var($main-radius);
-    padding-top: var($main-padding);
+    padding-top: 0.1rem;
+
+    text-align: left;
+    display: grid;
+    align-content: start;
   }
 }

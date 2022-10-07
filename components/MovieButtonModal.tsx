@@ -11,6 +11,9 @@ import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import TranslateIcon from "@mui/icons-material/Translate";
+import StarBorderIcon from "@mui/icons-material/StarBorder";
 import Box from "@mui/material/Box";
 
 import Dialog from "@mui/material/Dialog";
@@ -92,8 +95,6 @@ function MovieButtonModal(props: MovieButtonModalProps) {
     });
   }, []);
 
-  // const mData:
-
   const btnLabel = props.btnLabel || "See Details";
 
   return (
@@ -112,11 +113,11 @@ function MovieButtonModal(props: MovieButtonModalProps) {
       >
         <div className={styles.container}>
           <nav id="nav" className={styles.nav}>
-            Navbar
+            <IconButton onClick={handleClose}>
+              <CloseIcon></CloseIcon>
+            </IconButton>
           </nav>
           <div id="overview" className={styles.overview}>
-            <p>Overview</p>
-            <p>Directors, Actors, etc.</p>
             <p>{data.overview}</p>
           </div>
           <div id="poster" className={styles.poster}>
@@ -133,24 +134,25 @@ function MovieButtonModal(props: MovieButtonModalProps) {
           </div>
           <div id="info" className={styles.info}>
             <p>
-              {`${data.runtime} min | ${String(genres).replace(",", ", ")}`}
+              <AccessTimeIcon></AccessTimeIcon>
+              <span className="ml-1">{`${data.runtime} min`}</span>
             </p>
-            <p></p>
-            <p>Original Language: {data.original_language}</p>
-            <p></p>
+            <p>
+              <TranslateIcon></TranslateIcon>
+              <span className="ml-1">{data.original_language}</span>
+            </p>
           </div>
           <div id="score" className={styles.score}>
             <p>
-              {data.vote_average
-                ? `${Math.round(data.vote_average * 10)}%`
-                : "N/A"}
+              <StarBorderIcon></StarBorderIcon>
+              <span className="ml-1">
+                {data.vote_average
+                  ? `${Math.round(data.vote_average * 10)}% TMDb`
+                  : "N/A"}
+              </span>
             </p>
           </div>
         </div>
-
-        <DialogActions>
-          <Button onClick={handleClose}>Close</Button>
-        </DialogActions>
       </Dialog>
     </>
   );
