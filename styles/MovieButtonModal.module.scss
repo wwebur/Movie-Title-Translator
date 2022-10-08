@@ -4,7 +4,7 @@ $main-radius: 5px;
 $main-padding: 5px;
 
 $modal-title-font-size: 24px;
-$modal-text-font-size: 18px;
+$modal-text-font-size: 16px;
 
 // Mobile devices
 @media only screen and (max-width: 550px) {
@@ -80,28 +80,23 @@ $modal-text-font-size: 18px;
 
   .container {
     display: grid;
-    height: 100vh;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 0.2fr 0.2fr 0.2fr 1.2fr;
+    grid-template-rows: 0.2fr 0.1fr 1.2fr;
     grid-template-areas:
-    "nav nav nav"
     "poster title title"
-    "poster score info"
+    "poster info info"
     "poster overview overview";
     grid-gap: 0.2rem;
     background: $dark-gray;
-    color: #ffffff;
+    color: $prim-white;
     text-align: center;
     padding: 10px;
   }
 
   .nav {
-    grid-area: nav;
-    border-radius: var($main-radius);
-    padding-top: var($main-padding);
-    text-align: end;
-    padding-right: 10px;
-    align-self: center;
+    position: absolute;
+    right: 10px;
+    z-index: 99;
   }
   
   .overview {
@@ -111,6 +106,7 @@ $modal-text-font-size: 18px;
     
     text-align: start;
     font-size: $modal-text-font-size;
+    color: $sec-white;
   }
   
   .poster {
@@ -121,16 +117,21 @@ $modal-text-font-size: 18px;
     justify-self: center;
     flex: 0 0 auto;
     padding: 1rem;
+    border-radius: 10px !important;
   }
   
   .title {
     grid-area: title;
     border-radius: var($main-radius);
     padding-top: var($main-padding);
+    margin-top: 10px;
 
     font-size: $modal-title-font-size;
     align-self: center;
+    text-align: left;
     font-weight: 600;
+    color: $prim-white;
+    opacity: 0.95;
   }
   
   .info {
@@ -139,17 +140,10 @@ $modal-text-font-size: 18px;
     padding-top: var($main-padding);
 
     text-align: left;
-    display: grid;
-    align-content: space-around;
-  }
-  
-  .score {
-    grid-area: score;
-    border-radius: var($main-radius);
-    padding-top: 0.1rem;
-
-    text-align: left;
-    display: grid;
-    align-content: start;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 10vw 0 0;
+    color: $prim-light-blue;
+    opacity: 0.95;
   }
 }

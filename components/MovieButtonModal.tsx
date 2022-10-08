@@ -107,7 +107,7 @@ function MovieButtonModal(props: MovieButtonModalProps) {
         onClose={handleClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
-        className={styles.dialog}
+        className={`${styles.dialog}`}
         maxWidth="md"
         fullWidth
       >
@@ -117,9 +117,6 @@ function MovieButtonModal(props: MovieButtonModalProps) {
               <CloseIcon></CloseIcon>
             </IconButton>
           </nav>
-          <div id="overview" className={styles.overview}>
-            <p>{data.overview}</p>
-          </div>
           <div id="poster" className={styles.poster}>
             <img
               src={
@@ -127,30 +124,32 @@ function MovieButtonModal(props: MovieButtonModalProps) {
                   ? `https://image.tmdb.org/t/p/w200${data.poster_path}`
                   : "/no-image-available.png"
               }
+              className="rounded"
             />
           </div>
           <div id="title" className={styles.title}>
             {data.title}
           </div>
           <div id="info" className={styles.info}>
-            <p>
+            <div className={styles.infoContent}>
               <AccessTimeIcon></AccessTimeIcon>
-              <span className="ml-1">{`${data.runtime} min`}</span>
-            </p>
-            <p>
-              <TranslateIcon></TranslateIcon>
-              <span className="ml-1">{data.original_language}</span>
-            </p>
-          </div>
-          <div id="score" className={styles.score}>
-            <p>
+              <span>{`${data.runtime} min`}</span>
+            </div>
+            <div>
               <StarBorderIcon></StarBorderIcon>
               <span className="ml-1">
                 {data.vote_average
                   ? `${Math.round(data.vote_average * 10)}% TMDb`
                   : "N/A"}
               </span>
-            </p>
+            </div>
+            <div>
+              <TranslateIcon></TranslateIcon>
+              <span className="ml-1">{data.original_language}</span>
+            </div>
+          </div>
+          <div id="overview" className={styles.overview}>
+            <p>{data.overview}</p>
           </div>
         </div>
       </Dialog>
