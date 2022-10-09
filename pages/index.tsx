@@ -86,6 +86,8 @@ const Home: NextPage = () => {
   }
 
   function populateMovieCards(searchRes: MovieSearchResType) {
+    if (!searchRes || !searchRes.results) return;
+
     const smallImgBaseUrl = "https://image.tmdb.org/t/p/w200";
     let arr = [];
 
@@ -168,6 +170,8 @@ const Home: NextPage = () => {
     searchQuery: string,
     mdbApiKey: string
   ) {
+    if (!searchQuery) return;
+
     try {
       const { data, status } = await Promise.resolve(
         axios.get<GetMoviesResType>(
