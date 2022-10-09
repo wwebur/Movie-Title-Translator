@@ -18,10 +18,11 @@ $modal-text-font-size: 16px;
       "info"
       "score"
       "description";
+    background-color: $dark-gray;
+    padding: 8px;
   }
 
   .nav {
-    background: $dark-gray;
     grid-area: nav;
     border-radius: var($main-radius);
     padding-top: var($main-padding);
@@ -31,40 +32,38 @@ $modal-text-font-size: 16px;
   }
   
   .overview {
-    background: $dark-gray;
     grid-area: overview;
     border-radius: var($main-radius);
     padding-top: var($main-padding);
     
-    text-align: start;
+    text-align: justify;
   }
   
   .poster {
-    background: $dark-gray;
     grid-area: poster;
     border-radius: var($main-radius);
     padding-top: var($main-padding);
+    display: flex;
+    justify-content: center;
+    margin: 10px 0 0 0;
   }
   
   .title {
-    background: $dark-gray;
     grid-area: title;
     border-radius: var($main-radius);
     padding-top: var($main-padding);
+    font-size: $modal-title-font-size;
+    font-weight: 700;
+    margin: 20px 0 0 0;
   }
   
   .info {
-    background: $dark-gray;
     grid-area: info;
     border-radius: var($main-radius);
     padding-top: var($main-padding);
-  }
-  
-  .score {
-    background: $dark-gray;
-    grid-area: score;
-    border-radius: var($main-radius);
-    padding-top: var($main-padding);
+    color: $prim-light-blue;
+    opacity: 0.9;
+    margin: 10px 0;
   }
 }
 
