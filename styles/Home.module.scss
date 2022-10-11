@@ -12,6 +12,7 @@
       "switch-lang-btn"
       "dest-lang"
       "search-btn"
+      "warning-message"
       "movie-cards";
   }
   
@@ -74,6 +75,7 @@
       "search-box search-box search-box"
       "source-lang switch-lang-btn dest-lang"
       "search-btn search-btn search-btn"
+      "warning-message warning-message warning-message"
       "movie-cards movie-cards movie-cards";
     grid-gap: 0.2rem;
     text-align: center;
@@ -152,6 +154,12 @@
   font-family: "Oswald", "Helvetica", "Roboto";
   text-align: center;
   text-transform: uppercase;
+}
+
+.warningMessage {
+  grid-area: warning-message;
+  color: #fff570;
+  margin-top: 20px;
 }
 
 .movieCards {

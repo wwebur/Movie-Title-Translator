@@ -66,6 +66,7 @@ const Home: NextPage = () => {
   const [destLang, setDestLang] = React.useState("pt-BR");
   const [titleSearch, setTitleSearch] = React.useState("");
   const [movieCards, setMovieCards] = React.useState([]);
+  const [warningMsg, setWarningMsg] = React.useState("");
 
   const mdbApi = process.env.NEXT_PUBLIC_MDB_API_KEY;
 
@@ -170,7 +171,16 @@ const Home: NextPage = () => {
     searchQuery: string,
     mdbApiKey: string
   ) {
-    if (!searchQuery) return;
+    if (!searchQuery) {
+      setWarningMsg("Search field cannot be empty");
+      return false;
+    }
+    if (sourceLang === destLang) {
+      setWarningMsg("Idioms must be different");
+      return false;
+    }
+
+    setWarningMsg("");
 
     try {
       const { data, status } = await Promise.resolve(
@@ -346,6 +356,12 @@ const Home: NextPage = () => {
               Search
             </Button>
           </div>
+
+          {warningMsg === "" ? (
+            <></>
+          ) : (
+            <div className={styles.warningMessage}>{warningMsg}</div>
+          )}
 
           <div className={`${styles.movieCards} grid place-content-center`}>
             {movieCards}
