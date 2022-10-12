@@ -323,7 +323,7 @@ const Home: NextPage = () => {
           </div>
 
           <div className={`${styles.switchLangBtn}`}>
-            <IconButton onClick={swapLangs}>
+            <IconButton id="swap-btn" onClick={swapLangs}>
               <SwapHorizIcon></SwapHorizIcon>
             </IconButton>
           </div>

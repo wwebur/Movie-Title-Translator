@@ -39,6 +39,25 @@ describe("basic functionalities", () => {
     );
   });
 
+  it("swap source and translation idioms", () => {
+    cy.get("#source-lang")
+      .parent()
+      .click()
+      .get('ul > li[data-value="en-US"]')
+      .click();
+
+    cy.get("#dest-lang")
+      .parent()
+      .click()
+      .get('ul > li[data-value="pt-BR"]')
+      .click();
+
+    cy.get("#swap-btn").click();
+
+    cy.get("#source-lang").contains("Portuguese (BR)");
+    cy.get("#dest-lang").contains("English");
+  });
+
   it("search by pressing enter", () => {
     cy.get("#search-box").click().type("the godfather{enter}");
 
