@@ -273,7 +273,7 @@ const Home: NextPage = () => {
               className="text-prim-white"
             >
               <TextField
-                id="outlined-basic"
+                id="search-box"
                 className={styles.searchTextField}
                 label="Search Movie Title"
                 variant="outlined"
@@ -311,6 +311,7 @@ const Home: NextPage = () => {
               <FormControl fullWidth>
                 <InputLabel>From</InputLabel>
                 <Select
+                  id="source-lang"
                   value={sourceLang}
                   label="From"
                   onChange={changeSourceLang}
@@ -331,7 +332,12 @@ const Home: NextPage = () => {
             <Box sx={{}}>
               <FormControl fullWidth>
                 <InputLabel>To</InputLabel>
-                <Select value={destLang} label="To" onChange={changeDestLang}>
+                <Select
+                  id="dest-lang"
+                  value={destLang}
+                  label="To"
+                  onChange={changeDestLang}
+                >
                   {langMenuItems}
                 </Select>
               </FormControl>
@@ -340,6 +346,7 @@ const Home: NextPage = () => {
 
           <div className={`${styles.searchBtn} grid place-items-center`}>
             <Button
+              id="search-btn"
               variant="contained"
               size="large"
               className="bg-prim-light-blue text-prim-dark-blue font-bold"
@@ -360,10 +367,15 @@ const Home: NextPage = () => {
           {warningMsg === "" ? (
             <></>
           ) : (
-            <div className={styles.warningMessage}>{warningMsg}</div>
+            <div id="warning-message" className={styles.warningMessage}>
+              {warningMsg}
+            </div>
           )}
 
-          <div className={`${styles.movieCards} grid place-content-center`}>
+          <div
+            id="movie-cards-list"
+            className={`${styles.movieCards} grid place-content-center`}
+          >
             {movieCards}
           </div>
         </main>
