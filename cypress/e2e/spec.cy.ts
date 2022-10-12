@@ -1,6 +1,6 @@
 describe("basic functionalities", () => {
   beforeEach(() => {
-    cy.visit("http://localhost:3000");
+    cy.visit("/");
   });
 
   it("no empty search", () => {
