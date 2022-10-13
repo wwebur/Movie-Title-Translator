@@ -1,0 +1,148 @@
+@import "./_GlobalVariables.scss";
+
+$main-radius: 5px;
+$main-padding: 5px;
+
+$modal-title-font-size: 24px;
+$modal-text-font-size: 16px;
+
+// Mobile devices
+@media only screen and (max-width: 550px) {
+  .container {
+    grid-template-columns: 1fr;
+    grid-template-rows: 0.4fr 0.4fr 2.2fr 1.2fr 1.2fr 1.2fr;
+    grid-template-areas:
+      "nav"
+      "poster"
+      "title"
+      "info"
+      "score"
+      "description";
+    background-color: $dark-gray;
+    padding: 8px;
+  }
+
+  .nav {
+    grid-area: nav;
+    border-radius: var($main-radius);
+    padding-top: var($main-padding);
+    text-align: end;
+    padding-right: 10px;
+    align-self: center;
+  }
+  
+  .overview {
+    grid-area: overview;
+    border-radius: var($main-radius);
+    padding-top: var($main-padding);
+    
+    text-align: justify;
+  }
+  
+  .poster {
+    grid-area: poster;
+    border-radius: var($main-radius);
+    padding-top: var($main-padding);
+    display: flex;
+    justify-content: center;
+    margin: 10px 0 0 0;
+  }
+  
+  .title {
+    grid-area: title;
+    border-radius: var($main-radius);
+    padding-top: var($main-padding);
+    font-size: $modal-title-font-size;
+    font-weight: 700;
+    margin: 20px 0 0 0;
+  }
+  
+  .info {
+    grid-area: info;
+    border-radius: var($main-radius);
+    padding-top: var($main-padding);
+    color: $prim-light-blue;
+    opacity: 0.9;
+    margin: 10px 0;
+  }
+}
+
+// Desktop Devices
+@media only screen and (min-width: 551px) {
+  .dialog {
+    display: flex;
+    place-content: center;
+    max-height: 700px !important;
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+
+  .container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 0.2fr 0.1fr 1.2fr;
+    grid-template-areas:
+    "poster title title"
+    "poster info info"
+    "poster overview overview";
+    grid-gap: 0.2rem;
+    background: $dark-gray;
+    color: $prim-white;
+    text-align: center;
+    padding: 10px;
+  }
+
+  .nav {
+    position: absolute;
+    right: 10px;
+    z-index: 99;
+  }
+  
+  .overview {
+    grid-area: overview;
+    border-radius: var($main-radius);
+    padding-top: 0.5rem;
+    
+    text-align: start;
+    font-size: $modal-text-font-size;
+    color: $sec-white;
+  }
+  
+  .poster {
+    grid-area: poster;
+    border-radius: var($main-radius);
+    padding-top: var($main-padding);
+    align-self: start;
+    justify-self: center;
+    flex: 0 0 auto;
+    padding: 1rem;
+    border-radius: 10px !important;
+  }
+  
+  .title {
+    grid-area: title;
+    border-radius: var($main-radius);
+    padding-top: var($main-padding);
+    margin-top: 10px;
+
+    font-size: $modal-title-font-size;
+    align-self: center;
+    text-align: left;
+    font-weight: 600;
+    color: $prim-white;
+    opacity: 0.95;
+  }
+  
+  .info {
+    grid-area: info;
+    border-radius: var($main-radius);
+    padding-top: var($main-padding);
+
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 10vw 0 0;
+    color: $prim-light-blue;
+    opacity: 0.95;
+  }
+}
