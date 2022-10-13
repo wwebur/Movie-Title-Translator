@@ -65,19 +65,7 @@ describe("basic functionalities", () => {
   });
 
   it("verify movie title translation", () => {
-    cy.get("#source-lang")
-      .parent()
-      .click()
-      .get('ul > li[data-value="en-US"]')
-      .click();
-
-    cy.get("#dest-lang")
-      .parent()
-      .click()
-      .get('ul > li[data-value="pt-BR"]')
-      .click();
-
-    cy.get("#search-box").click().type("the godfather{enter}");
+    cy.seeTranslation("the godfather", "en-US", "pt-BR");
 
     cy.get(".MuiCardContent-root")
       .contains("button", "See Translation")

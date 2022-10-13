@@ -35,3 +35,36 @@
 //     }
 //   }
 // }
+
+Cypress.Commands.add(
+  "seeTranslation",
+  (movieQuery, sourceLangCode, destLangCode) => {
+    cy.get("#source-lang")
+      .parent()
+      .click()
+      .get(`ul > li[data-value="${sourceLangCode}"]`)
+      .click();
+
+    cy.get("#dest-lang")
+      .parent()
+      .click()
+      .get(`ul > li[data-value="${destLangCode}"]`)
+      .click();
+
+    cy.get("#search-box").click().type(`${movieQuery}{enter}`);
+  }
+);
+
+declare global {
+  namespace Cypress {
+    interface Chainable {
+      seeTranslation(
+        movieQuery: string,
+        sourceLangCode: string,
+        destLangCode: string
+      ): Chainable<void>;
+    }
+  }
+}
+
+export {};
