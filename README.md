@@ -1,34 +1,21 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## About
+[comment]: <> (Add GIF showing usage)
 
-## Getting Started
+The Movie Title Translator is a project I made purely to learn and experiment with React and Next.js (coming from a Vue.js background as a developer). The project uses TMDB Rest Api to make the translations. The project is running fine, but some componentization refactoring is still needed to make the code clean and sparking joy :)
 
-First, run the development server:
+This project was also built using [TypeScript](https://www.typescriptlang.org/), [Tailwind](https://tailwindcss.com/), [Sass (.scss)](https://sass-lang.com/), [MUI Material Design](https://mui.com/), and E2E automated testing with [Cypress](https://www.cypress.io/).
+## Running this project on your machine
+Fork or clone this repo to your machine, then go the repo root directory on your terminal and install the dependencies with ```npm i```
+
+In order to run this project you need to [register](https://www.themoviedb.org/signup) and have a [TMDB API key (v3)](https://developers.themoviedb.org/3/getting-started/introduction). It's free and doesn't require any credit card. After getting an api key, in the repo root directory create a file named ```.env.local``` and then insert your api key:
 
 ```bash
-npm run dev
-# or
-yarn dev
+NEXT_PUBLIC_MDB_API_KEY=your_api_key_pasted_here
 ```
+Run it with ```npm run dev```, open the browser at [http://localhost:3000/](http://localhost:3000/) and you're good to go!
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+*Note: I built this project using node version 12.22.10
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## Cypress automated E2E test
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+While running the project, open another terminal tab and run ```npm run e2e```
