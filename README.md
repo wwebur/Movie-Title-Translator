@@ -1,6 +1,9 @@
-## About
-[comment]: <> (Add GIF showing usage)
+## The Movie Title Translator
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/74467166/195982138-0813a4e0-33c8-4d0d-9240-17dabcbeb25e.gif" height="350"/>
+</p>
 
+## About
 The Movie Title Translator is a project I made purely to learn and experiment with React and Next.js (coming from a Vue.js background as a developer). The project uses TMDB Rest Api to make the translations. The project is running fine, but some componentization refactoring is still needed to make the code clean and sparking joy :)
 
 This project was also built using [TypeScript](https://www.typescriptlang.org/), [Tailwind](https://tailwindcss.com/), [Sass (.scss)](https://sass-lang.com/), [MUI Material Design](https://mui.com/), and E2E automated testing with [Cypress](https://www.cypress.io/).
